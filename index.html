@@ -15,11 +15,23 @@ background:#f5f5f5;
 }
 
 header{
-background:#ff5722;
+background:#d32f2f;
 color:white;
 text-align:center;
-padding:20px;
-font-size:28px;
+padding:15px;
+}
+
+.logo{
+width:220px;
+}
+
+.search{
+padding:10px;
+width:90%;
+margin:10px auto;
+display:block;
+border-radius:8px;
+border:1px solid #ccc;
 }
 
 .section{
@@ -53,7 +65,7 @@ margin-top:8px;
 }
 
 button{
-background:#ff5722;
+background:#d32f2f;
 color:white;
 border:none;
 padding:6px 10px;
@@ -74,7 +86,7 @@ padding:20px;
 border-radius:10px;
 }
 
-.pay{
+.order{
 background:green;
 margin-top:10px;
 }
@@ -157,12 +169,6 @@ window.open("https://wa.me/"+phone+"?text="+msg)
 
 }
 
-function pay(){
-
-alert("UPI Payment demo. Connect Razorpay later.")
-
-}
-
 </script>
 
 </head>
@@ -171,9 +177,15 @@ alert("UPI Payment demo. Connect Razorpay later.")
 
 <header>
 
-🍽 Sameer Restaurant
+<img class="logo" src="https://i.imgur.com/V6R9T5H.png">
+
+<h2>Sameer Restaurant</h2>
+
+<p>Near Nagarmall, Khalifa Bagh, Bhagalpur</p>
 
 </header>
+
+<input class="search" placeholder="Search food...">
 
 <div class="section">
 
@@ -235,134 +247,6 @@ Dal Tadka ₹120
 
 </div>
 
-<div class="food">
-
-<img src="https://upload.wikimedia.org/wikipedia/commons/3/33/Butter_Chicken.jpg">
-
-Butter Chicken ₹240
-
-<div class="controls">
-
-<button onclick="minus(4)">-</button>
-
-<span id="q4" class="qty">0</span>
-
-<button onclick="plus(4,'Butter Chicken',240)">+</button>
-
-</div>
-
-</div>
-
-</div>
-
-</div>
-
-<div class="section">
-
-<h2>Fast Food</h2>
-
-<div class="menu-row">
-
-<div class="food">
-
-<img src="https://upload.wikimedia.org/wikipedia/commons/d/d3/Supreme_pizza.jpg">
-
-Pizza ₹250
-
-<div class="controls">
-
-<button onclick="minus(5)">-</button>
-
-<span id="q5" class="qty">0</span>
-
-<button onclick="plus(5,'Pizza',250)">+</button>
-
-</div>
-
-</div>
-
-<div class="food">
-
-<img src="https://upload.wikimedia.org/wikipedia/commons/0/0b/RedDot_Burger.jpg">
-
-Burger ₹120
-
-<div class="controls">
-
-<button onclick="minus(6)">-</button>
-
-<span id="q6" class="qty">0</span>
-
-<button onclick="plus(6,'Burger',120)">+</button>
-
-</div>
-
-</div>
-
-<div class="food">
-
-<img src="https://upload.wikimedia.org/wikipedia/commons/4/4b/French_fries.jpg">
-
-Fries ₹90
-
-<div class="controls">
-
-<button onclick="minus(7)">-</button>
-
-<span id="q7" class="qty">0</span>
-
-<button onclick="plus(7,'Fries',90)">+</button>
-
-</div>
-
-</div>
-
-</div>
-
-</div>
-
-<div class="section">
-
-<h2>Desserts</h2>
-
-<div class="menu-row">
-
-<div class="food">
-
-<img src="https://upload.wikimedia.org/wikipedia/commons/0/05/Gulab_jamun.jpg">
-
-Gulab Jamun ₹60
-
-<div class="controls">
-
-<button onclick="minus(8)">-</button>
-
-<span id="q8" class="qty">0</span>
-
-<button onclick="plus(8,'Gulab Jamun',60)">+</button>
-
-</div>
-
-</div>
-
-<div class="food">
-
-<img src="https://upload.wikimedia.org/wikipedia/commons/b/bb/Ice_Cream_dessert_02.jpg">
-
-Ice Cream ₹80
-
-<div class="controls">
-
-<button onclick="minus(9)">-</button>
-
-<span id="q9" class="qty">0</span>
-
-<button onclick="plus(9,'Ice Cream',80)">+</button>
-
-</div>
-
-</div>
-
 </div>
 
 </div>
@@ -375,9 +259,7 @@ Ice Cream ₹80
 
 <h3 id="total">Total ₹0</h3>
 
-<button onclick="order()">Order WhatsApp</button>
-
-<button class="pay" onclick="pay()">Pay Online</button>
+<button class="order" onclick="order()">Order on WhatsApp</button>
 
 </div>
 
