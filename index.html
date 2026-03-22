@@ -1,9 +1,7 @@
 <!DOCTYPE html>
 <html>
 <head>
-
 <title>Sameer Restaurant</title>
-
 <meta name="viewport" content="width=device-width, initial-scale=1">
 
 <style>
@@ -148,7 +146,7 @@ function upi(){
 
 var upi="upi://pay?pa=7992428242@fam&pn=SameerRestaurant&am="+total+"&cu=INR"
 
-window.location.href=upi
+window.open(upi)
 
 }
 
@@ -168,30 +166,6 @@ window.open("https://wa.me/917992428242?text="+msg)
 
 }
 
-function searchFood(){
-
-var input=document.getElementById("search").value.toLowerCase()
-
-var foods=document.getElementsByClassName("food")
-
-for(var i=0;i<foods.length;i++){
-
-var txt=foods[i].innerText.toLowerCase()
-
-if(txt.includes(input)){
-
-foods[i].style.display="block"
-
-}else{
-
-foods[i].style.display="none"
-
-}
-
-}
-
-}
-
 </script>
 
 </head>
@@ -208,7 +182,33 @@ foods[i].style.display="none"
 
 </header>
 
-<input id="search" class="search" onkeyup="searchFood()" placeholder="Search food...">
+<input class="search" placeholder="Search food...">
+
+<div class="section">
+
+<h3>Snacks</h3>
+
+<div class="menu-row">
+
+<div class="food">
+
+<img src="https://upload.wikimedia.org/wikipedia/commons/5/5b/Candy.jpg">
+
+Toffee ₹1
+
+<br>
+
+<button onclick="minus(1)">-</button>
+
+<span id="q1" class="qty">0</span>
+
+<button onclick="plus(1,'Toffee',1)">+</button>
+
+</div>
+
+</div>
+
+</div>
 
 <div class="section">
 
@@ -224,11 +224,11 @@ Biryani ₹180
 
 <br>
 
-<button onclick="minus(1)">-</button>
+<button onclick="minus(2)">-</button>
 
-<span id="q1" class="qty">0</span>
+<span id="q2" class="qty">0</span>
 
-<button onclick="plus(1,'Biryani',180)">+</button>
+<button onclick="plus(2,'Biryani',180)">+</button>
 
 </div>
 
@@ -240,11 +240,11 @@ Paneer Butter Masala ₹160
 
 <br>
 
-<button onclick="minus(2)">-</button>
+<button onclick="minus(3)">-</button>
 
-<span id="q2" class="qty">0</span>
+<span id="q3" class="qty">0</span>
 
-<button onclick="plus(2,'Paneer Butter Masala',160)">+</button>
+<button onclick="plus(3,'Paneer Butter Masala',160)">+</button>
 
 </div>
 
@@ -256,127 +256,11 @@ Dal Tadka ₹120
 
 <br>
 
-<button onclick="minus(3)">-</button>
-
-<span id="q3" class="qty">0</span>
-
-<button onclick="plus(3,'Dal Tadka',120)">+</button>
-
-</div>
-
-<div class="food">
-
-<img src="https://upload.wikimedia.org/wikipedia/commons/3/33/Butter_Chicken.jpg">
-
-Butter Chicken ₹240
-
-<br>
-
 <button onclick="minus(4)">-</button>
 
 <span id="q4" class="qty">0</span>
 
-<button onclick="plus(4,'Butter Chicken',240)">+</button>
-
-</div>
-
-</div>
-
-</div>
-
-<div class="section">
-
-<h3>Fast Food</h3>
-
-<div class="menu-row">
-
-<div class="food">
-
-<img src="https://upload.wikimedia.org/wikipedia/commons/d/d3/Supreme_pizza.jpg">
-
-Pizza ₹250
-
-<br>
-
-<button onclick="minus(10)">-</button>
-
-<span id="q10" class="qty">0</span>
-
-<button onclick="plus(10,'Pizza',250)">+</button>
-
-</div>
-
-<div class="food">
-
-<img src="https://upload.wikimedia.org/wikipedia/commons/0/0b/RedDot_Burger.jpg">
-
-Burger ₹120
-
-<br>
-
-<button onclick="minus(11)">-</button>
-
-<span id="q11" class="qty">0</span>
-
-<button onclick="plus(11,'Burger',120)">+</button>
-
-</div>
-
-<div class="food">
-
-<img src="https://upload.wikimedia.org/wikipedia/commons/4/4b/French_fries.jpg">
-
-Fries ₹90
-
-<br>
-
-<button onclick="minus(12)">-</button>
-
-<span id="q12" class="qty">0</span>
-
-<button onclick="plus(12,'Fries',90)">+</button>
-
-</div>
-
-</div>
-
-</div>
-
-<div class="section">
-
-<h3>Desserts</h3>
-
-<div class="menu-row">
-
-<div class="food">
-
-<img src="https://upload.wikimedia.org/wikipedia/commons/0/05/Gulab_jamun.jpg">
-
-Gulab Jamun ₹60
-
-<br>
-
-<button onclick="minus(20)">-</button>
-
-<span id="q20" class="qty">0</span>
-
-<button onclick="plus(20,'Gulab Jamun',60)">+</button>
-
-</div>
-
-<div class="food">
-
-<img src="https://upload.wikimedia.org/wikipedia/commons/b/bb/Ice_Cream_dessert_02.jpg">
-
-Ice Cream ₹80
-
-<br>
-
-<button onclick="minus(21)">-</button>
-
-<span id="q21" class="qty">0</span>
-
-<button onclick="plus(21,'Ice Cream',80)">+</button>
+<button onclick="plus(4,'Dal Tadka',120)">+</button>
 
 </div>
 
@@ -397,5 +281,4 @@ Ice Cream ₹80
 </div>
 
 </body>
-
 </html>
