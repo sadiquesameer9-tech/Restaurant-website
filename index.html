@@ -1,7 +1,9 @@
 <!DOCTYPE html>
 <html>
 <head>
+
 <title>Sameer Restaurant</title>
+
 <meta name="viewport" content="width=device-width, initial-scale=1">
 
 <style>
@@ -142,11 +144,23 @@ document.getElementById("total").innerText="₹"+total
 
 }
 
+/* FIXED PAYMENT FUNCTION */
+
 function upi(){
 
-var upi="upi://pay?pa=7992428242@fam&pn=SameerRestaurant&am="+total+"&cu=INR"
+if(total<=0){
 
-window.open(upi)
+alert("Please add item first")
+
+return
+
+}
+
+var amount = total
+
+var upiLink = "upi://pay?pa=7992428242@fam&pn=SameerRestaurant&am="+amount+"&cu=INR"
+
+window.open(upiLink)
 
 }
 
@@ -166,6 +180,30 @@ window.open("https://wa.me/917992428242?text="+msg)
 
 }
 
+function searchFood(){
+
+var input=document.getElementById("search").value.toLowerCase()
+
+var foods=document.getElementsByClassName("food")
+
+for(var i=0;i<foods.length;i++){
+
+var txt=foods[i].innerText.toLowerCase()
+
+if(txt.includes(input)){
+
+foods[i].style.display="block"
+
+}else{
+
+foods[i].style.display="none"
+
+}
+
+}
+
+}
+
 </script>
 
 </head>
@@ -182,33 +220,7 @@ window.open("https://wa.me/917992428242?text="+msg)
 
 </header>
 
-<input class="search" placeholder="Search food...">
-
-<div class="section">
-
-<h3>Snacks</h3>
-
-<div class="menu-row">
-
-<div class="food">
-
-<img src="https://upload.wikimedia.org/wikipedia/commons/5/5b/Candy.jpg">
-
-Toffee ₹1
-
-<br>
-
-<button onclick="minus(1)">-</button>
-
-<span id="q1" class="qty">0</span>
-
-<button onclick="plus(1,'Toffee',1)">+</button>
-
-</div>
-
-</div>
-
-</div>
+<input id="search" class="search" onkeyup="searchFood()" placeholder="Search food...">
 
 <div class="section">
 
@@ -224,11 +236,11 @@ Biryani ₹180
 
 <br>
 
-<button onclick="minus(2)">-</button>
+<button onclick="minus(1)">-</button>
 
-<span id="q2" class="qty">0</span>
+<span id="q1" class="qty">0</span>
 
-<button onclick="plus(2,'Biryani',180)">+</button>
+<button onclick="plus(1,'Biryani',180)">+</button>
 
 </div>
 
@@ -240,11 +252,11 @@ Paneer Butter Masala ₹160
 
 <br>
 
-<button onclick="minus(3)">-</button>
+<button onclick="minus(2)">-</button>
 
-<span id="q3" class="qty">0</span>
+<span id="q2" class="qty">0</span>
 
-<button onclick="plus(3,'Paneer Butter Masala',160)">+</button>
+<button onclick="plus(2,'Paneer Butter Masala',160)">+</button>
 
 </div>
 
@@ -256,11 +268,27 @@ Dal Tadka ₹120
 
 <br>
 
+<button onclick="minus(3)">-</button>
+
+<span id="q3" class="qty">0</span>
+
+<button onclick="plus(3,'Dal Tadka',120)">+</button>
+
+</div>
+
+<div class="food">
+
+<img src="https://upload.wikimedia.org/wikipedia/commons/3/33/Butter_Chicken.jpg">
+
+Butter Chicken ₹240
+
+<br>
+
 <button onclick="minus(4)">-</button>
 
 <span id="q4" class="qty">0</span>
 
-<button onclick="plus(4,'Dal Tadka',120)">+</button>
+<button onclick="plus(4,'Butter Chicken',240)">+</button>
 
 </div>
 
@@ -281,4 +309,5 @@ Dal Tadka ₹120
 </div>
 
 </body>
+
 </html>
