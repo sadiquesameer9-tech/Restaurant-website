@@ -11,7 +11,7 @@
 body{
 font-family:Arial;
 margin:0;
-background:#f4f4f4;
+background:#f5f5f5;
 }
 
 header{
@@ -26,10 +26,6 @@ font-size:28px;
 padding:20px;
 }
 
-.section h2{
-margin-bottom:10px;
-}
-
 .menu-row{
 display:flex;
 overflow-x:auto;
@@ -37,7 +33,7 @@ gap:15px;
 }
 
 .food{
-min-width:180px;
+min-width:170px;
 background:white;
 border-radius:10px;
 padding:10px;
@@ -60,7 +56,7 @@ button{
 background:#ff5722;
 color:white;
 border:none;
-padding:5px 10px;
+padding:6px 10px;
 border-radius:5px;
 font-size:16px;
 }
@@ -76,6 +72,11 @@ background:white;
 margin:20px;
 padding:20px;
 border-radius:10px;
+}
+
+.pay{
+background:green;
+margin-top:10px;
 }
 
 </style>
@@ -156,6 +157,12 @@ window.open("https://wa.me/"+phone+"?text="+msg)
 
 }
 
+function pay(){
+
+alert("UPI Payment demo. Connect Razorpay later.")
+
+}
+
 </script>
 
 </head>
@@ -170,7 +177,7 @@ window.open("https://wa.me/"+phone+"?text="+msg)
 
 <div class="section">
 
-<h2>Indian Main Course</h2>
+<h2>Indian Food</h2>
 
 <div class="menu-row">
 
@@ -178,9 +185,7 @@ window.open("https://wa.me/"+phone+"?text="+msg)
 
 <img src="https://upload.wikimedia.org/wikipedia/commons/4/45/A_small_bowl_of_Biryani.jpg">
 
-<h4>Biryani</h4>
-
-₹180
+Biryani ₹180
 
 <div class="controls">
 
@@ -198,9 +203,7 @@ window.open("https://wa.me/"+phone+"?text="+msg)
 
 <img src="https://upload.wikimedia.org/wikipedia/commons/3/35/Paneer_Butter_Masala.jpg">
 
-<h4>Paneer Butter Masala</h4>
-
-₹160
+Paneer Butter Masala ₹160
 
 <div class="controls">
 
@@ -218,9 +221,7 @@ window.open("https://wa.me/"+phone+"?text="+msg)
 
 <img src="https://upload.wikimedia.org/wikipedia/commons/6/6f/Dal_Tadka.jpg">
 
-<h4>Dal Tadka</h4>
-
-₹120
+Dal Tadka ₹120
 
 <div class="controls">
 
@@ -236,11 +237,9 @@ window.open("https://wa.me/"+phone+"?text="+msg)
 
 <div class="food">
 
-<img src="https://upload.wikimedia.org/wikipedia/commons/0/09/Chicken_Tikka.jpg">
+<img src="https://upload.wikimedia.org/wikipedia/commons/3/33/Butter_Chicken.jpg">
 
-<h4>Chicken Tikka</h4>
-
-₹220
+Butter Chicken ₹240
 
 <div class="controls">
 
@@ -248,7 +247,7 @@ window.open("https://wa.me/"+phone+"?text="+msg)
 
 <span id="q4" class="qty">0</span>
 
-<button onclick="plus(4,'Chicken Tikka',220)">+</button>
+<button onclick="plus(4,'Butter Chicken',240)">+</button>
 
 </div>
 
@@ -268,9 +267,7 @@ window.open("https://wa.me/"+phone+"?text="+msg)
 
 <img src="https://upload.wikimedia.org/wikipedia/commons/d/d3/Supreme_pizza.jpg">
 
-<h4>Pizza</h4>
-
-₹250
+Pizza ₹250
 
 <div class="controls">
 
@@ -288,9 +285,7 @@ window.open("https://wa.me/"+phone+"?text="+msg)
 
 <img src="https://upload.wikimedia.org/wikipedia/commons/0/0b/RedDot_Burger.jpg">
 
-<h4>Burger</h4>
-
-₹120
+Burger ₹120
 
 <div class="controls">
 
@@ -308,9 +303,7 @@ window.open("https://wa.me/"+phone+"?text="+msg)
 
 <img src="https://upload.wikimedia.org/wikipedia/commons/4/4b/French_fries.jpg">
 
-<h4>French Fries</h4>
-
-₹90
+Fries ₹90
 
 <div class="controls">
 
@@ -318,7 +311,7 @@ window.open("https://wa.me/"+phone+"?text="+msg)
 
 <span id="q7" class="qty">0</span>
 
-<button onclick="plus(7,'French Fries',90)">+</button>
+<button onclick="plus(7,'Fries',90)">+</button>
 
 </div>
 
@@ -338,9 +331,7 @@ window.open("https://wa.me/"+phone+"?text="+msg)
 
 <img src="https://upload.wikimedia.org/wikipedia/commons/0/05/Gulab_jamun.jpg">
 
-<h4>Gulab Jamun</h4>
-
-₹60
+Gulab Jamun ₹60
 
 <div class="controls">
 
@@ -358,9 +349,7 @@ window.open("https://wa.me/"+phone+"?text="+msg)
 
 <img src="https://upload.wikimedia.org/wikipedia/commons/b/bb/Ice_Cream_dessert_02.jpg">
 
-<h4>Ice Cream</h4>
-
-₹80
+Ice Cream ₹80
 
 <div class="controls">
 
@@ -386,7 +375,9 @@ window.open("https://wa.me/"+phone+"?text="+msg)
 
 <h3 id="total">Total ₹0</h3>
 
-<button onclick="order()">Order on WhatsApp</button>
+<button onclick="order()">Order WhatsApp</button>
+
+<button class="pay" onclick="pay()">Pay Online</button>
 
 </div>
 
