@@ -20,10 +20,6 @@ padding:20px;
 font-size:28px;
 }
 
-h2{
-padding-left:20px;
-}
-
 .menu{
 display:grid;
 grid-template-columns:repeat(auto-fit,minmax(200px,1fr));
@@ -34,9 +30,9 @@ padding:20px;
 .food{
 background:white;
 border-radius:10px;
-box-shadow:0 4px 10px rgba(0,0,0,0.2);
 padding:10px;
 text-align:center;
+box-shadow:0 4px 10px rgba(0,0,0,0.2);
 }
 
 .food img{
@@ -46,11 +42,16 @@ object-fit:cover;
 border-radius:10px;
 }
 
+.qty{
+font-size:18px;
+margin:5px;
+}
+
 button{
 background:#ff5722;
 color:white;
 border:none;
-padding:8px 12px;
+padding:5px 10px;
 border-radius:5px;
 cursor:pointer;
 }
@@ -69,12 +70,28 @@ border-radius:10px;
 var cart={}
 var total=0
 
-function add(item,price){
+function plus(item,price){
+
+if(!cart[item]){
+cart[item]={price:price,qty:0}
+}
+
+cart[item].qty+=1
+
+update()
+
+}
+
+function minus(item){
 
 if(cart[item]){
-cart[item].qty+=1
-}else{
-cart[item]={price:price,qty:1}
+
+cart[item].qty-=1
+
+if(cart[item].qty<=0){
+delete cart[item]
+}
+
 }
 
 update()
@@ -100,7 +117,7 @@ document.getElementById("total").innerHTML="Total ₹"+total
 
 function order(){
 
-var phone="91XXXXXXXXXX"
+var phone="+917992428242"
 
 var message="Restaurant Order:%0A"
 
@@ -126,102 +143,39 @@ window.open("https://wa.me/"+phone+"?text="+message)
 🍽 Sameer Restaurant
 </header>
 
-<h2>🍛 Indian Food</h2>
-
 <div class="menu">
 
 <div class="food">
 <img src="https://upload.wikimedia.org/wikipedia/commons/4/45/A_small_bowl_of_Biryani.jpg">
 <h3>Chicken Biryani</h3>
 <p>₹180</p>
-<button onclick="add('Chicken Biryani',180)">Add +1</button>
-</div>
 
-<div class="food">
-<img src="https://upload.wikimedia.org/wikipedia/commons/3/35/Paneer_Butter_Masala.jpg">
-<h3>Paneer Butter Masala</h3>
-<p>₹160</p>
-<button onclick="add('Paneer Butter Masala',160)">Add +1</button>
-</div>
+<button onclick="minus('Chicken Biryani')">−</button>
+<span class="qty">Qty</span>
+<button onclick="plus('Chicken Biryani',180)">+</button>
 
 </div>
-
-<h2>🍗 Starter</h2>
-
-<div class="menu">
-
-<div class="food">
-<img src="https://upload.wikimedia.org/wikipedia/commons/0/09/Chicken_Tikka.jpg">
-<h3>Chicken Tikka</h3>
-<p>₹220</p>
-<button onclick="add('Chicken Tikka',220)">Add +1</button>
-</div>
-
-<div class="food">
-<img src="https://upload.wikimedia.org/wikipedia/commons/8/82/Samosachutney.jpg">
-<h3>Samosa</h3>
-<p>₹30</p>
-<button onclick="add('Samosa',30)">Add +1</button>
-</div>
-
-</div>
-
-<h2>🍕 Fast Food</h2>
-
-<div class="menu">
 
 <div class="food">
 <img src="https://upload.wikimedia.org/wikipedia/commons/d/d3/Supreme_pizza.jpg">
 <h3>Pizza</h3>
 <p>₹250</p>
-<button onclick="add('Pizza',250)">Add +1</button>
+
+<button onclick="minus('Pizza')">−</button>
+<span class="qty">Qty</span>
+<button onclick="plus('Pizza',250)">+</button>
+
 </div>
 
 <div class="food">
 <img src="https://upload.wikimedia.org/wikipedia/commons/0/0b/RedDot_Burger.jpg">
 <h3>Burger</h3>
 <p>₹120</p>
-<button onclick="add('Burger',120)">Add +1</button>
-</div>
 
-</div>
+<button onclick="minus('Burger')">−</button>
+<span class="qty">Qty</span>
+<button onclick="plus('Burger',120)">+</button>
 
-<h2>🥤 Cold Drinks</h2>
-
-<div class="menu">
-
-<div class="food">
-<img src="https://upload.wikimedia.org/wikipedia/commons/7/7a/Coca-Cola_glass_bottle.jpg">
-<h3>Coca Cola</h3>
-<p>₹40</p>
-<button onclick="add('Coca Cola',40)">Add +1</button>
-</div>
-
-<div class="food">
-<img src="https://upload.wikimedia.org/wikipedia/commons/2/2f/Pepsi_can.jpg">
-<h3>Pepsi</h3>
-<p>₹40</p>
-<button onclick="add('Pepsi',40)">Add +1</button>
-</div>
-
-</div>
-
-<h2>🍰 Dessert</h2>
-
-<div class="menu">
-
-<div class="food">
-<img src="https://upload.wikimedia.org/wikipedia/commons/0/05/Gulab_jamun.jpg">
-<h3>Gulab Jamun</h3>
-<p>₹60</p>
-<button onclick="add('Gulab Jamun',60)">Add +1</button>
-</div>
-
-<div class="food">
-<img src="https://upload.wikimedia.org/wikipedia/commons/b/bb/Ice_Cream_dessert_02.jpg">
-<h3>Ice Cream</h3>
-<p>₹80</p>
-<button onclick="add('Ice Cream',80)">Add +1</button>
 </div>
 
 </div>
