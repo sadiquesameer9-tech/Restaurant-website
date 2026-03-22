@@ -1,7 +1,9 @@
 <!DOCTYPE html>
 <html>
 <head>
+
 <title>Sameer Restaurant</title>
+
 <meta name="viewport" content="width=device-width, initial-scale=1">
 
 <style>
@@ -20,50 +22,59 @@ padding:20px;
 font-size:28px;
 }
 
-h2{
-padding-left:20px;
-}
-
-.menu{
-display:grid;
-grid-template-columns:repeat(auto-fit,minmax(200px,1fr));
-gap:20px;
+.section{
 padding:20px;
 }
 
+.section h2{
+margin-bottom:10px;
+}
+
+.menu-row{
+display:flex;
+overflow-x:auto;
+gap:15px;
+}
+
 .food{
+min-width:180px;
 background:white;
-padding:10px;
 border-radius:10px;
+padding:10px;
 box-shadow:0 4px 10px rgba(0,0,0,0.2);
 text-align:center;
 }
 
 .food img{
 width:100%;
-height:150px;
+height:120px;
 object-fit:cover;
-border-radius:10px;
+border-radius:8px;
+}
+
+.controls{
+margin-top:8px;
 }
 
 button{
 background:#ff5722;
 color:white;
 border:none;
-padding:6px 10px;
+padding:5px 10px;
 border-radius:5px;
-cursor:pointer;
+font-size:16px;
 }
 
 .qty{
-margin:5px;
+font-size:18px;
+margin:0 10px;
 font-weight:bold;
 }
 
 .cart{
 background:white;
 margin:20px;
-padding:15px;
+padding:20px;
 border-radius:10px;
 }
 
@@ -74,27 +85,34 @@ border-radius:10px;
 var cart={}
 var total=0
 
-function plus(item,price){
+function plus(id,name,price){
 
-if(!cart[item]){
-cart[item]={price:price,qty:0}
+if(!cart[id]){
+cart[id]={name:name,price:price,qty:0}
 }
 
-cart[item].qty+=1
+cart[id].qty++
+
+document.getElementById("q"+id).innerText=cart[id].qty
 
 update()
 
 }
 
-function minus(item){
+function minus(id){
 
-if(cart[item]){
+if(cart[id]){
 
-cart[item].qty-=1
+cart[id].qty--
 
-if(cart[item].qty<=0){
-delete cart[item]
+if(cart[id].qty<=0){
+
+cart[id].qty=0
+delete cart[id]
+
 }
+
+document.getElementById("q"+id).innerText=cart[id]?cart[id].qty:0
 
 }
 
@@ -109,13 +127,14 @@ total=0
 
 for(var i in cart){
 
-list+=i+" x"+cart[i].qty+"<br>"
+list+=cart[i].name+" x"+cart[i].qty+"<br>"
+
 total+=cart[i].price*cart[i].qty
 
 }
 
 document.getElementById("cart").innerHTML=list
-document.getElementById("total").innerHTML="Total ₹"+total
+document.getElementById("total").innerText="Total ₹"+total
 
 }
 
@@ -123,17 +142,17 @@ function order(){
 
 var phone="917992428242"
 
-var message="Restaurant Order:%0A"
+var msg="Restaurant Order:%0A"
 
 for(var i in cart){
 
-message+=i+" x"+cart[i].qty+"%0A"
+msg+=cart[i].name+" x"+cart[i].qty+"%0A"
 
 }
 
-message+="Total ₹"+total
+msg+="Total ₹"+total
 
-window.open("https://wa.me/"+phone+"?text="+message)
+window.open("https://wa.me/"+phone+"?text="+msg)
 
 }
 
@@ -144,153 +163,224 @@ window.open("https://wa.me/"+phone+"?text="+message)
 <body>
 
 <header>
+
 🍽 Sameer Restaurant
+
 </header>
 
-<h2>🍛 Indian Main Course</h2>
+<div class="section">
 
-<div class="menu">
+<h2>Indian Main Course</h2>
+
+<div class="menu-row">
 
 <div class="food">
+
 <img src="https://upload.wikimedia.org/wikipedia/commons/4/45/A_small_bowl_of_Biryani.jpg">
-<h3>Chicken Biryani</h3>
-<p>₹180</p>
-<button onclick="minus('Chicken Biryani')">-</button>
-<span class="qty">+1</span>
-<button onclick="plus('Chicken Biryani',180)">+</button>
+
+<h4>Biryani</h4>
+
+₹180
+
+<div class="controls">
+
+<button onclick="minus(1)">-</button>
+
+<span id="q1" class="qty">0</span>
+
+<button onclick="plus(1,'Biryani',180)">+</button>
+
+</div>
+
 </div>
 
 <div class="food">
+
 <img src="https://upload.wikimedia.org/wikipedia/commons/3/35/Paneer_Butter_Masala.jpg">
-<h3>Paneer Butter Masala</h3>
-<p>₹160</p>
-<button onclick="minus('Paneer Butter Masala')">-</button>
-<span class="qty">+1</span>
-<button onclick="plus('Paneer Butter Masala',160)">+</button>
+
+<h4>Paneer Butter Masala</h4>
+
+₹160
+
+<div class="controls">
+
+<button onclick="minus(2)">-</button>
+
+<span id="q2" class="qty">0</span>
+
+<button onclick="plus(2,'Paneer Butter Masala',160)">+</button>
+
+</div>
+
 </div>
 
 <div class="food">
-<img src="https://upload.wikimedia.org/wikipedia/commons/0/09/Chicken_Tikka.jpg">
-<h3>Chicken Curry</h3>
-<p>₹200</p>
-<button onclick="minus('Chicken Curry')">-</button>
-<span class="qty">+1</span>
-<button onclick="plus('Chicken Curry',200)">+</button>
-</div>
 
-<div class="food">
 <img src="https://upload.wikimedia.org/wikipedia/commons/6/6f/Dal_Tadka.jpg">
-<h3>Dal Tadka</h3>
-<p>₹120</p>
-<button onclick="minus('Dal Tadka')">-</button>
-<span class="qty">+1</span>
-<button onclick="plus('Dal Tadka',120)">+</button>
-</div>
+
+<h4>Dal Tadka</h4>
+
+₹120
+
+<div class="controls">
+
+<button onclick="minus(3)">-</button>
+
+<span id="q3" class="qty">0</span>
+
+<button onclick="plus(3,'Dal Tadka',120)">+</button>
 
 </div>
 
-<h2>🍕 Fast Food</h2>
-
-<div class="menu">
+</div>
 
 <div class="food">
+
+<img src="https://upload.wikimedia.org/wikipedia/commons/0/09/Chicken_Tikka.jpg">
+
+<h4>Chicken Tikka</h4>
+
+₹220
+
+<div class="controls">
+
+<button onclick="minus(4)">-</button>
+
+<span id="q4" class="qty">0</span>
+
+<button onclick="plus(4,'Chicken Tikka',220)">+</button>
+
+</div>
+
+</div>
+
+</div>
+
+</div>
+
+<div class="section">
+
+<h2>Fast Food</h2>
+
+<div class="menu-row">
+
+<div class="food">
+
 <img src="https://upload.wikimedia.org/wikipedia/commons/d/d3/Supreme_pizza.jpg">
-<h3>Pizza</h3>
-<p>₹250</p>
-<button onclick="minus('Pizza')">-</button>
-<span class="qty">+1</span>
-<button onclick="plus('Pizza',250)">+</button>
+
+<h4>Pizza</h4>
+
+₹250
+
+<div class="controls">
+
+<button onclick="minus(5)">-</button>
+
+<span id="q5" class="qty">0</span>
+
+<button onclick="plus(5,'Pizza',250)">+</button>
+
+</div>
+
 </div>
 
 <div class="food">
+
 <img src="https://upload.wikimedia.org/wikipedia/commons/0/0b/RedDot_Burger.jpg">
-<h3>Burger</h3>
-<p>₹120</p>
-<button onclick="minus('Burger')">-</button>
-<span class="qty">+1</span>
-<button onclick="plus('Burger',120)">+</button>
+
+<h4>Burger</h4>
+
+₹120
+
+<div class="controls">
+
+<button onclick="minus(6)">-</button>
+
+<span id="q6" class="qty">0</span>
+
+<button onclick="plus(6,'Burger',120)">+</button>
+
+</div>
+
 </div>
 
 <div class="food">
-<img src="https://upload.wikimedia.org/wikipedia/commons/8/82/Samosachutney.jpg">
-<h3>Samosa</h3>
-<p>₹30</p>
-<button onclick="minus('Samosa')">-</button>
-<span class="qty">+1</span>
-<button onclick="plus('Samosa',30)">+</button>
-</div>
 
-<div class="food">
 <img src="https://upload.wikimedia.org/wikipedia/commons/4/4b/French_fries.jpg">
-<h3>French Fries</h3>
-<p>₹90</p>
-<button onclick="minus('French Fries')">-</button>
-<span class="qty">+1</span>
-<button onclick="plus('French Fries',90)">+</button>
+
+<h4>French Fries</h4>
+
+₹90
+
+<div class="controls">
+
+<button onclick="minus(7)">-</button>
+
+<span id="q7" class="qty">0</span>
+
+<button onclick="plus(7,'French Fries',90)">+</button>
+
+</div>
+
 </div>
 
 </div>
 
-<h2>🥤 Cold Drinks</h2>
+</div>
 
-<div class="menu">
+<div class="section">
+
+<h2>Desserts</h2>
+
+<div class="menu-row">
 
 <div class="food">
-<img src="https://upload.wikimedia.org/wikipedia/commons/7/7a/Coca-Cola_glass_bottle.jpg">
-<h3>Coca Cola</h3>
-<p>₹40</p>
-<button onclick="minus('Coca Cola')">-</button>
-<span class="qty">+1</span>
-<button onclick="plus('Coca Cola',40)">+</button>
-</div>
 
-<div class="food">
-<img src="https://upload.wikimedia.org/wikipedia/commons/2/2f/Pepsi_can.jpg">
-<h3>Pepsi</h3>
-<p>₹40</p>
-<button onclick="minus('Pepsi')">-</button>
-<span class="qty">+1</span>
-<button onclick="plus('Pepsi',40)">+</button>
-</div>
-
-<div class="food">
-<img src="https://upload.wikimedia.org/wikipedia/commons/3/33/Sprite_can.jpg">
-<h3>Sprite</h3>
-<p>₹40</p>
-<button onclick="minus('Sprite')">-</button>
-<span class="qty">+1</span>
-<button onclick="plus('Sprite',40)">+</button>
-</div>
-
-</div>
-
-<h2>🍨 Desserts</h2>
-
-<div class="menu">
-
-<div class="food">
 <img src="https://upload.wikimedia.org/wikipedia/commons/0/05/Gulab_jamun.jpg">
-<h3>Gulab Jamun</h3>
-<p>₹60</p>
-<button onclick="minus('Gulab Jamun')">-</button>
-<span class="qty">+1</span>
-<button onclick="plus('Gulab Jamun',60)">+</button>
+
+<h4>Gulab Jamun</h4>
+
+₹60
+
+<div class="controls">
+
+<button onclick="minus(8)">-</button>
+
+<span id="q8" class="qty">0</span>
+
+<button onclick="plus(8,'Gulab Jamun',60)">+</button>
+
+</div>
+
 </div>
 
 <div class="food">
+
 <img src="https://upload.wikimedia.org/wikipedia/commons/b/bb/Ice_Cream_dessert_02.jpg">
-<h3>Ice Cream</h3>
-<p>₹80</p>
-<button onclick="minus('Ice Cream')">-</button>
-<span class="qty">+1</span>
-<button onclick="plus('Ice Cream',80)">+</button>
+
+<h4>Ice Cream</h4>
+
+₹80
+
+<div class="controls">
+
+<button onclick="minus(9)">-</button>
+
+<span id="q9" class="qty">0</span>
+
+<button onclick="plus(9,'Ice Cream',80)">+</button>
+
+</div>
+
+</div>
+
 </div>
 
 </div>
 
 <div class="cart">
 
-<h2>🛒 Cart</h2>
+<h2>Cart</h2>
 
 <div id="cart"></div>
 
@@ -301,4 +391,5 @@ window.open("https://wa.me/"+phone+"?text="+message)
 </div>
 
 </body>
+
 </html>
