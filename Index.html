@@ -1,0 +1,140 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Sameer Restaurant</title>
+
+<style>
+
+body{
+font-family: Arial;
+margin:0;
+background:#fafafa;
+}
+
+header{
+background:#ff5733;
+color:white;
+text-align:center;
+padding:20px;
+font-size:28px;
+}
+
+.menu{
+display:grid;
+grid-template-columns:repeat(auto-fit,minmax(220px,1fr));
+gap:20px;
+padding:20px;
+}
+
+.item{
+background:white;
+border-radius:10px;
+box-shadow:0 4px 10px rgba(0,0,0,0.1);
+text-align:center;
+padding:15px;
+}
+
+.item img{
+width:100%;
+height:150px;
+object-fit:cover;
+border-radius:10px;
+}
+
+.price{
+color:green;
+font-weight:bold;
+margin:8px 0;
+}
+
+button{
+background:#ff5733;
+color:white;
+border:none;
+padding:10px 15px;
+border-radius:5px;
+cursor:pointer;
+}
+
+button:hover{
+background:#e64a19;
+}
+
+footer{
+text-align:center;
+padding:15px;
+background:#222;
+color:white;
+}
+
+.whatsapp{
+position:fixed;
+bottom:20px;
+right:20px;
+background:#25D366;
+color:white;
+padding:12px 18px;
+border-radius:50px;
+text-decoration:none;
+font-weight:bold;
+}
+
+</style>
+</head>
+
+<body>
+
+<header>
+🍽 Sameer Restaurant
+</header>
+
+<div class="menu">
+
+<div class="item">
+<img src="https://source.unsplash.com/400x300/?biryani">
+<h3>Chicken Biryani</h3>
+<p class="price">₹180</p>
+<button onclick="order('Chicken Biryani')">Order</button>
+</div>
+
+<div class="item">
+<img src="https://source.unsplash.com/400x300/?burger">
+<h3>Burger</h3>
+<p class="price">₹120</p>
+<button onclick="order('Burger')">Order</button>
+</div>
+
+<div class="item">
+<img src="https://source.unsplash.com/400x300/?pizza">
+<h3>Pizza</h3>
+<p class="price">₹250</p>
+<button onclick="order('Pizza')">Order</button>
+</div>
+
+<div class="item">
+<img src="https://source.unsplash.com/400x300/?paneer">
+<h3>Paneer Butter Masala</h3>
+<p class="price">₹160</p>
+<button onclick="order('Paneer Butter Masala')">Order</button>
+</div>
+
+</div>
+
+<a class="whatsapp" href="https://wa.me/+917992428242">WhatsApp Order</a>
+
+<footer>
+© 2026 Sameer Restaurant
+</footer>
+
+<script>
+
+function order(item){
+alert("You ordered: " + item);
+}
+
+</script>
+
+</body>
+</html>
