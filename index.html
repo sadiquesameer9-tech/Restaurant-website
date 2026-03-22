@@ -11,25 +11,21 @@
 body{
 font-family:Arial;
 margin:0;
-background:#f5f5f5;
+background:#f4f4f4;
 }
 
 header{
 background:#d32f2f;
 color:white;
-text-align:center;
 padding:15px;
-}
-
-.logo{
-width:220px;
+text-align:center;
 }
 
 .search{
-padding:10px;
 width:90%;
 margin:10px auto;
 display:block;
+padding:10px;
 border-radius:8px;
 border:1px solid #ccc;
 }
@@ -45,50 +41,47 @@ gap:15px;
 }
 
 .food{
-min-width:170px;
+min-width:160px;
 background:white;
 border-radius:10px;
 padding:10px;
-box-shadow:0 4px 10px rgba(0,0,0,0.2);
 text-align:center;
+box-shadow:0 4px 10px rgba(0,0,0,0.2);
 }
 
 .food img{
 width:100%;
-height:120px;
+height:110px;
 object-fit:cover;
 border-radius:8px;
-}
-
-.controls{
-margin-top:8px;
 }
 
 button{
 background:#d32f2f;
 color:white;
 border:none;
-padding:6px 10px;
+padding:5px 10px;
 border-radius:5px;
-font-size:16px;
 }
 
 .qty{
-font-size:18px;
 margin:0 10px;
 font-weight:bold;
 }
 
 .cart{
+position:fixed;
+bottom:0;
+left:0;
+right:0;
 background:white;
-margin:20px;
-padding:20px;
-border-radius:10px;
+padding:15px;
+box-shadow:0 -3px 10px rgba(0,0,0,0.3);
 }
 
-.order{
+.pay{
 background:green;
-margin-top:10px;
+margin-left:10px;
 }
 
 </style>
@@ -135,27 +128,33 @@ update()
 
 function update(){
 
-var list=""
 total=0
+var items=""
 
 for(var i in cart){
 
-list+=cart[i].name+" x"+cart[i].qty+"<br>"
+items+=cart[i].name+" x"+cart[i].qty+"<br>"
 
 total+=cart[i].price*cart[i].qty
 
 }
 
-document.getElementById("cart").innerHTML=list
-document.getElementById("total").innerText="Total ₹"+total
+document.getElementById("items").innerHTML=items
+document.getElementById("total").innerText="₹"+total
 
 }
 
-function order(){
+function upi(){
 
-var phone="917992428242"
+var upi="upi://pay?pa=7992428242@fam&pn=SameerRestaurant&am="+total+"&cu=INR"
 
-var msg="Restaurant Order:%0A"
+window.location.href=upi
+
+}
+
+function whatsapp(){
+
+var msg="Order:%0A"
 
 for(var i in cart){
 
@@ -165,7 +164,31 @@ msg+=cart[i].name+" x"+cart[i].qty+"%0A"
 
 msg+="Total ₹"+total
 
-window.open("https://wa.me/"+phone+"?text="+msg)
+window.open("https://wa.me/917992428242?text="+msg)
+
+}
+
+function searchFood(){
+
+var input=document.getElementById("search").value.toLowerCase()
+
+var foods=document.getElementsByClassName("food")
+
+for(var i=0;i<foods.length;i++){
+
+var txt=foods[i].innerText.toLowerCase()
+
+if(txt.includes(input)){
+
+foods[i].style.display="block"
+
+}else{
+
+foods[i].style.display="none"
+
+}
+
+}
 
 }
 
@@ -177,19 +200,19 @@ window.open("https://wa.me/"+phone+"?text="+msg)
 
 <header>
 
-<img class="logo" src="https://i.imgur.com/V6R9T5H.png">
-
 <h2>Sameer Restaurant</h2>
 
 <p>Near Nagarmall, Khalifa Bagh, Bhagalpur</p>
 
+<p>⏰ 10 AM – 11 PM | 🚚 Free Delivery (7km)</p>
+
 </header>
 
-<input class="search" placeholder="Search food...">
+<input id="search" class="search" onkeyup="searchFood()" placeholder="Search food...">
 
 <div class="section">
 
-<h2>Indian Food</h2>
+<h3>Indian Food</h3>
 
 <div class="menu-row">
 
@@ -199,7 +222,7 @@ window.open("https://wa.me/"+phone+"?text="+msg)
 
 Biryani ₹180
 
-<div class="controls">
+<br>
 
 <button onclick="minus(1)">-</button>
 
@@ -209,15 +232,13 @@ Biryani ₹180
 
 </div>
 
-</div>
-
 <div class="food">
 
 <img src="https://upload.wikimedia.org/wikipedia/commons/3/35/Paneer_Butter_Masala.jpg">
 
 Paneer Butter Masala ₹160
 
-<div class="controls">
+<br>
 
 <button onclick="minus(2)">-</button>
 
@@ -227,15 +248,13 @@ Paneer Butter Masala ₹160
 
 </div>
 
-</div>
-
 <div class="food">
 
 <img src="https://upload.wikimedia.org/wikipedia/commons/6/6f/Dal_Tadka.jpg">
 
 Dal Tadka ₹120
 
-<div class="controls">
+<br>
 
 <button onclick="minus(3)">-</button>
 
@@ -245,6 +264,120 @@ Dal Tadka ₹120
 
 </div>
 
+<div class="food">
+
+<img src="https://upload.wikimedia.org/wikipedia/commons/3/33/Butter_Chicken.jpg">
+
+Butter Chicken ₹240
+
+<br>
+
+<button onclick="minus(4)">-</button>
+
+<span id="q4" class="qty">0</span>
+
+<button onclick="plus(4,'Butter Chicken',240)">+</button>
+
+</div>
+
+</div>
+
+</div>
+
+<div class="section">
+
+<h3>Fast Food</h3>
+
+<div class="menu-row">
+
+<div class="food">
+
+<img src="https://upload.wikimedia.org/wikipedia/commons/d/d3/Supreme_pizza.jpg">
+
+Pizza ₹250
+
+<br>
+
+<button onclick="minus(10)">-</button>
+
+<span id="q10" class="qty">0</span>
+
+<button onclick="plus(10,'Pizza',250)">+</button>
+
+</div>
+
+<div class="food">
+
+<img src="https://upload.wikimedia.org/wikipedia/commons/0/0b/RedDot_Burger.jpg">
+
+Burger ₹120
+
+<br>
+
+<button onclick="minus(11)">-</button>
+
+<span id="q11" class="qty">0</span>
+
+<button onclick="plus(11,'Burger',120)">+</button>
+
+</div>
+
+<div class="food">
+
+<img src="https://upload.wikimedia.org/wikipedia/commons/4/4b/French_fries.jpg">
+
+Fries ₹90
+
+<br>
+
+<button onclick="minus(12)">-</button>
+
+<span id="q12" class="qty">0</span>
+
+<button onclick="plus(12,'Fries',90)">+</button>
+
+</div>
+
+</div>
+
+</div>
+
+<div class="section">
+
+<h3>Desserts</h3>
+
+<div class="menu-row">
+
+<div class="food">
+
+<img src="https://upload.wikimedia.org/wikipedia/commons/0/05/Gulab_jamun.jpg">
+
+Gulab Jamun ₹60
+
+<br>
+
+<button onclick="minus(20)">-</button>
+
+<span id="q20" class="qty">0</span>
+
+<button onclick="plus(20,'Gulab Jamun',60)">+</button>
+
+</div>
+
+<div class="food">
+
+<img src="https://upload.wikimedia.org/wikipedia/commons/b/bb/Ice_Cream_dessert_02.jpg">
+
+Ice Cream ₹80
+
+<br>
+
+<button onclick="minus(21)">-</button>
+
+<span id="q21" class="qty">0</span>
+
+<button onclick="plus(21,'Ice Cream',80)">+</button>
+
 </div>
 
 </div>
@@ -253,13 +386,13 @@ Dal Tadka ₹120
 
 <div class="cart">
 
-<h2>Cart</h2>
+<div id="items"></div>
 
-<div id="cart"></div>
+<h3>Total <span id="total">₹0</span></h3>
 
-<h3 id="total">Total ₹0</h3>
+<button onclick="whatsapp()">Order WhatsApp</button>
 
-<button class="order" onclick="order()">Order on WhatsApp</button>
+<button class="pay" onclick="upi()">Pay UPI</button>
 
 </div>
 
