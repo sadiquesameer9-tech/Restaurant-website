@@ -20,6 +20,10 @@ padding:20px;
 font-size:28px;
 }
 
+h2{
+padding-left:20px;
+}
+
 .menu{
 display:grid;
 grid-template-columns:repeat(auto-fit,minmax(200px,1fr));
@@ -29,14 +33,16 @@ padding:20px;
 
 .food{
 background:white;
-padding:10px;
 border-radius:10px;
 box-shadow:0 4px 10px rgba(0,0,0,0.2);
+padding:10px;
 text-align:center;
 }
 
 .food img{
 width:100%;
+height:150px;
+object-fit:cover;
 border-radius:10px;
 }
 
@@ -44,15 +50,15 @@ button{
 background:#ff5722;
 color:white;
 border:none;
-padding:10px;
+padding:8px 12px;
 border-radius:5px;
 cursor:pointer;
 }
 
 .cart{
 background:white;
-padding:15px;
 margin:20px;
+padding:15px;
 border-radius:10px;
 }
 
@@ -60,82 +66,7 @@ border-radius:10px;
 
 <script>
 
-var cart=[]
+var cart={}
 var total=0
 
-function add(item,price){
-
-cart.push(item)
-total+=price
-
-document.getElementById("cart").innerHTML=cart.join("<br>")
-document.getElementById("total").innerHTML="Total: ₹"+total
-
-}
-
-function order(){
-
-var phone="91XXXXXXXXXX"
-
-var message="Order:%0A"+cart.join("%0A")+"%0ATotal ₹"+total
-
-window.open("https://wa.me/"+phone+"?text="+message)
-
-}
-
-</script>
-
-</head>
-
-<body>
-
-<header>
-🍽 Sameer Restaurant
-</header>
-
-<div class="menu">
-
-<div class="food">
-<img src="https://source.unsplash.com/400x300/?biryani">
-<h3>Chicken Biryani</h3>
-<p>₹180</p>
-<button onclick="add('Chicken Biryani',180)">Add</button>
-</div>
-
-<div class="food">
-<img src="https://source.unsplash.com/400x300/?pizza">
-<h3>Pizza</h3>
-<p>₹250</p>
-<button onclick="add('Pizza',250)">Add</button>
-</div>
-
-<div class="food">
-<img src="https://source.unsplash.com/400x300/?burger">
-<h3>Burger</h3>
-<p>₹120</p>
-<button onclick="add('Burger',120)">Add</button>
-</div>
-
-<div class="food">
-<img src="https://source.unsplash.com/400x300/?paneer">
-<h3>Paneer Butter Masala</h3>
-<p>₹160</p>
-<button onclick="add('Paneer Butter Masala',160)">Add</button>
-</div>
-
-</div>
-
-<div class="cart">
-
-<h2>🛒 Cart</h2>
-
-<div id="cart"></div>
-
-<h3 id="total">Total: ₹0</h3>
-
-<button onclick="order()">Order on WhatsApp</button>
-
-</div>
-
-</body>
-</html>
+function add
